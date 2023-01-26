@@ -1,6 +1,6 @@
 import ToDoItem from "./to-do-item/ToDoItem"
 
-const ToDoList = ({ changeItem, deleteItem, arrItemsObj, completedItem }) => {
+const ToDoList = ({ changeItem, deleteItem, arrItemsObj, getTypeSorted, completedItem }) => {
 
   return (
     <div className="todo-list">
@@ -12,6 +12,7 @@ const ToDoList = ({ changeItem, deleteItem, arrItemsObj, completedItem }) => {
           deleteItem={deleteItem}
           changeItem={changeItem}
           completedItem={completedItem}
+          getTypeSorted={getTypeSorted}
         />
       )}
     </div>

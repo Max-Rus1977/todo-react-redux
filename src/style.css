@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
 .app {
   width: 65%;
   margin: 0 auto;
@@ -20,13 +25,25 @@
   margin-top: 35px;
 }
 
-.box-totals span {
+.totals-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 35px;
   font-size: 20px;
+  background-color: #bbbbfd;
+  color: #fff;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .box-totals span + span {
   margin-left: 40px;
+}
+
+.total-active {
+  background-color: #2525ab;
 }
 
 .form-data {
@@ -46,15 +63,14 @@
 .box-input input,
 .box-textarea textarea {
   width: 100%;
+  padding: 10px 25px;
+  font-size: 18px;
+  border: 1px solid #2094d5;
   border-radius: 5px;
 }
 
-.box-input input {
-  height: 30px;
-}
-
 .box-textarea textarea {
-  height: 40px;
+  min-height: 50px;
 }
 
 .box-textarea {
@@ -64,13 +80,20 @@
 .btn-add {
   float: right;
   margin-top: 15px;
+  padding: 10px 30px;
+  background-color: #2525ab;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bolder;
+  color: #fff;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .line {
   width: 50%;
   height: 1px;
-  margin: 70px auto 0 auto;
+  margin: 100px auto 0 auto;
   background-color: black;
 }
 
@@ -81,13 +104,41 @@
   width: 70%;
   margin: 25px auto;
   padding: 15px 20px 15px 20px;
-  border: 1px solid #000;
+  border: 1px solid #5c20d5;
   border-radius: 8px;
-  transition: 0.3s;
+}
+
+.box-todo .box-input {
+  margin-top: 0;
+}
+
+.box-todo input {
+  padding: 0;
+  font-size: 16px;
+  color: rgb(0 0 0 / 47%);
+  border: none;
+  border-bottom: 1px solid #2094d5;
+  border-radius: 0;
+}
+
+.actions button {
+  background: none;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 .actions button + button {
-  margin-left: 8px;
+  margin-left: 12px;
+}
+
+.btn-delete {
+  color: red;
+}
+
+.btn-patch {
+  color: #b58e00;
 }
 
 .completed {

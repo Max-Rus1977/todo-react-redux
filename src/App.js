@@ -12,57 +12,15 @@ import './style.css';
 
 function App() {
 
-  const [arrItemsObj, setArrItemObj] = useState([
-    { id: 1, completed: false, title: 'Заголовок', text: 'текст задачи' },
+  const [arrItemsObj, setArrItemsObj] = useState([
+    { id: 1, completed: false, title: 'Первый Заголовок', text: 'Первый текст задачи' },
     { id: 2, completed: false, title: 'Второй заголовок', text: 'Второй текст задачи' },
-    { id: 3, completed: false, title: 'Второй заголовок', text: 'Второй текст задачи' },
-    { id: 4, completed: true, title: 'Второй заголовок', text: 'Второй текст задачи' },
+    { id: 3, completed: false, title: 'Третий заголовок', text: 'Третий текст задачи' },
+    { id: 4, completed: true, title: 'Четвёртый заголовок', text: 'Четвёртый текст задачи' },
   ])
-  const [sorted, setSorted] = useState([])
-  const [isSorted, setIsSorted] = useState(false)
-  const [isCompleted, setIsCompleted] = useState(false)
+
+  const [isType, setIsType] = useState('0')
   const [countId, setCountId] = useState(5)
-
-  const sortedShowAll = () => {
-    setIsSorted(false)
-    setIsCompleted(false)
-  }
-
-  const sortedShowInExecution = () => {
-    const execution = filterCompleted(true, arrItemsObj)
-    setSorted(execution)
-    setIsSorted(true)
-    setIsCompleted(false)
-  }
-
-  const sortedShowFinished = () => {
-    const finished = filterCompleted(false, arrItemsObj)
-    setSorted(finished)
-    setIsSorted(true)
-    setIsCompleted(true)
-  }
-
-  const allCompleted = filterCompleted(true, arrItemsObj)
-  const countCompleted = allCompleted.length
-
-  const completedItem = (id) => {
-    const indexItem = arrItemsObj.findIndex((item) => item.id === id)
-    const newArrItems = [...arrItemsObj]
-
-    newArrItems[indexItem].completed = !newArrItems[indexItem].completed
-
-    if (!isCompleted) {
-      const finished = filterCompleted(true, arrItemsObj)
-      return setSorted(finished)
-    }
-    else if (isSorted) {
-      const execution = filterCompleted(false, arrItemsObj)
-      return setSorted(execution)
-    }
-
-    setArrItemObj(newArrItems)
-
-  }
 
   const getNewData = (title, text) => {
     const newItem = {
@@ -73,7 +31,33 @@ function App() {
     }
     setCountId(countId + 1)
 
-    setArrItemObj([newItem, ...arrItemsObj])
+    setArrItemsObj([newItem, ...arrItemsObj])
+  }
+
+  const getTypeSorted = (thisType) => {
+    setIsType(thisType)
+  }
+
+  const sorted = (type) => {
+    if (type === '0') {
+      return arrItemsObj
+    }
+    else if (type === '1') {
+      return filterCompleted(false, arrItemsObj)
+
+    }
+    else if (type === '2') {
+      return filterCompleted(true, arrItemsObj)
+    }
+  }
+
+  const completedItem = (id) => {
+    const indexItem = arrItemsObj.findIndex((item) => item.id === id)
+    const newArrItems = [...arrItemsObj]
+
+    newArrItems[indexItem].completed = !newArrItems[indexItem].completed
+    setArrItemsObj(newArrItems)
+
   }
 
   const changeItem = (id, newData) => {
@@ -84,28 +68,27 @@ function App() {
     const arrChangeItem = [...arrItemsObj]
     arrChangeItem[oldItemIndex] = { ...oldItem, title: newData.title, text: newData.text }
 
-    setArrItemObj(arrChangeItem)
+    setArrItemsObj(arrChangeItem)
   }
 
   const deleteItem = (idItem) => {
-    setArrItemObj(arrItemsObj.filter((item) => item.id !== idItem))
+    setArrItemsObj(arrItemsObj.filter((item) => item.id !== idItem))
   }
+
+  const finishedItems = filterCompleted(true, arrItemsObj)
 
   return (
     <div className="app">
       <GenTitle nameClass='gen-title' titleText='Список дел на React' />
       <Totals
-        countAll={arrItemsObj.length}
-        countFinished={countCompleted}
-        countExecution={arrItemsObj.length - countCompleted}
-        sortedShowAll={sortedShowAll}
-        sortedShowInExecution={sortedShowInExecution}
-        sortedShowFinished={sortedShowFinished}
+        allItems={arrItemsObj.length}
+        finishedItems={finishedItems.length}
+        getTypeSorted={getTypeSorted}
       />
       <FormData getNewData={getNewData} />
       <Line />
       <ToDoList
-        arrItemsObj={isSorted ? sorted : arrItemsObj}
+        arrItemsObj={sorted(isType)}
         deleteItem={deleteItem}
         changeItem={changeItem}
         completedItem={completedItem}

@@ -37,7 +37,7 @@ const FormData = ({ getNewData }) => {
         onChange={getOneChangeTextarea}
         value={dataForm.textareaValue}
       />
-      <MyButton className='btn-add'>Add To Do</MyButton>
+      <MyButton className='btn-add'>add to do</MyButton>
     </form>
   )
 }

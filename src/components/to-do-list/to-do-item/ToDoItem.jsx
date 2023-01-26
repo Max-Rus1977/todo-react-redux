@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import ContentItem from './ContentItem'
 import MyInput from '../../../UI/MyInput'
-import MyTextarea from '../../../UI/MyTextarea'
 import MyButton from '../../../UI/MyButton'
 
 const ToDoItem = ({ dataItem, changeItem, deleteItem, index, completedItem }) => {
@@ -10,7 +9,7 @@ const ToDoItem = ({ dataItem, changeItem, deleteItem, index, completedItem }) =>
   const [showFormChanges, setShowFormChanges] = useState(false)
   const [dataChanges, setDataChanges] = useState({ title: dataItem.title, text: dataItem.text })
 
-  const completed = () => {
+  const finished = () => {
     completedItem(dataItem.id)
   }
 
@@ -42,8 +41,8 @@ const ToDoItem = ({ dataItem, changeItem, deleteItem, index, completedItem }) =>
         {
           showFormChanges
             ? <>
-              <MyInput onChange={changeTitle} value={dataChanges.title} />
-              <MyTextarea onChange={changeText} value={dataChanges.text} />
+              <MyInput autoFocus onChange={changeTitle} value={dataChanges.title} />
+              <MyInput onChange={changeText} value={dataChanges.text} />
             </>
             : <ContentItem index={index} dataItem={dataItem} />
         }
@@ -51,13 +50,13 @@ const ToDoItem = ({ dataItem, changeItem, deleteItem, index, completedItem }) =>
       </div>
       <div className="actions">
         <MyButton
-          className={dataItem.completed ? 'btn-comped' : ''}
-          onClick={completed}
+          className={dataItem.completed ? 'btn-comped ' : ''}
+          onClick={finished}
         >
           ✓
         </MyButton>
-        <MyButton onClick={getChangeItem}>🔨</MyButton>
-        <MyButton onClick={removeItem}>❌</MyButton>
+        <MyButton className='btn-patch' onClick={getChangeItem}>⚒</MyButton>
+        <MyButton className='btn-delete' onClick={removeItem}>✖</MyButton>
       </div>
     </div>
   )
