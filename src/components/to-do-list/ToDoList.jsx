@@ -1,20 +1,14 @@
-import ToDoItem from "./to-do-item/ToDoItem"
+import ToDoItem from './to-do-item/ToDoItem'
 
-const ToDoList = ({ changeItem, deleteItem, arrItemsObj, getTypeSorted, completedItem }) => {
+const ToDoList = () => {
 
   return (
     <div className="todo-list">
-      {arrItemsObj.map((item, index) =>
+      {/* arrItemsObj.map((item) =>
         < ToDoItem
           key={item.id}
-          index={index}
-          dataItem={item}
-          deleteItem={deleteItem}
-          changeItem={changeItem}
-          completedItem={completedItem}
-          getTypeSorted={getTypeSorted}
         />
-      )}
+      ) */}
     </div>
   )
 }
