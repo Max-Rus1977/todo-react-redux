@@ -1,19 +1,32 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import MyInput from '../UI/MyInput'
 import MyTextarea from '../UI/MyTextarea'
 import MyButton from '../UI/MyButton'
 
-const FormData = ({ getNewData }) => {
+const FormData = () => {
 
   const [dataForm, setDataForm] = useState({ inputValue: '', textareaValue: '' })
+
+  const dispatch = useDispatch()
 
   const getDataForm = (event) => {
     event.preventDefault()
 
-    getNewData(dataForm.inputValue, dataForm.textareaValue)
+    const newItem = {
+      id: Date.now(),
+      completed: false,
+      title: dataForm.inputValue,
+      text: dataForm.textareaValue,
+    }
+
+    dispatch({ type: 'ADD_ITEM', newItem })
+
     setDataForm({ inputValue: '', textareaValue: '' })
+
   }
+
 
   const getOneChangeInput = (event) => {
     setDataForm({ ...dataForm, inputValue: event.target.value })

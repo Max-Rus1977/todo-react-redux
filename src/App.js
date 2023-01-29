@@ -1,5 +1,3 @@
-import filterCompleted from './utils/filterCompleted';
-
 import GenTitle from './components/GenTitle';
 import Totals from './components/Totals';
 import FormData from './components/FormData';
