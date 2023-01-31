@@ -1,3 +1,15 @@
+export const actionAddItem = (dataForm) => (
+  {
+    type: 'ADD_ITEM',
+    newItem: {
+      id: Date.now(),
+      completed: false,
+      title: dataForm.title,
+      text: dataForm.text,
+    }
+  }
+)
+
 export const actionRemove = (id) => (
   { type: 'DELETE_ITEM', id }
 )

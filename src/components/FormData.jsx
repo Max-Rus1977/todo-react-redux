@@ -1,7 +1,7 @@
-// import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { useInputData } from '../hook/useInputData'
+import { actionAddItem } from '../actions'
 
 import MyInput from '../UI/MyInput'
 import MyTextarea from '../UI/MyTextarea'
@@ -16,17 +16,9 @@ const FormData = () => {
   const getDataForm = (event) => {
     event.preventDefault()
 
-    const newItem = {
-      id: Date.now(),
-      completed: false,
-      title: dataForm.title,
-      text: dataForm.text,
-    }
-
-    dispatch({ type: 'ADD_ITEM', newItem })
+    dispatch(actionAddItem(dataForm))
 
     setDataChang({ title: '', text: '' })
-
   }
 
   return (
