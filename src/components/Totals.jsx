@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import filterCompleted from '../utils/filterCompleted'
+import { actionFilters } from '../actions'
 
 const Totals = () => {
 
@@ -9,7 +9,7 @@ const Totals = () => {
 
   const dispatch = useDispatch()
   const arrItemsData = useSelector((state) => state.todoReducer.arrItemsData)
-  const finished = filterCompleted(true, arrItemsData)
+  const finished = arrItemsData.filter(item => item.completed === true)
 
   const getType = (event) => {
 
@@ -17,7 +17,7 @@ const Totals = () => {
     arrActive.forEach((type, index, arr) => arr[index] = false)
     arrActive[event.target.id] = true
 
-    dispatch({ type: 'FILTERS', numberFilter: +event.target.id })
+    dispatch(actionFilters(event.target.id))
 
     setActive(arrActive);
   }

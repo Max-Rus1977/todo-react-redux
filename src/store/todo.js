@@ -10,7 +10,7 @@ const defaultState = {
 
 export const todoReducer = (state = defaultState, action) => {
 
-  console.log('action >>>', action);
+  // console.log('action >>>', action);
 
   switch (action.type) {
     case 'ADD_ITEM':
@@ -34,7 +34,7 @@ export const todoReducer = (state = defaultState, action) => {
         ...state, arrItemsData:
           [...state.arrItemsData.map(
             (item) => item.id === action.data.id
-              ? { ...item, title: action.data.changedData.title, text: action.data.changedData.text }
+              ? { ...item, title: action.data.dataChang.title, text: action.data.dataChang.text }
               : item
           )]
       }

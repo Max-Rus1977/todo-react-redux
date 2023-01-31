@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { actionRemove, actionCompleted, actionChange } from '../../../actions'
+
 import ContentItem from './ContentItem'
 import MyInput from '../../../UI/MyInput'
 import MyButton from '../../../UI/MyButton'
@@ -12,11 +14,11 @@ const ToDoItem = ({ dataItem, index }) => {
   const dispatch = useDispatch()
 
   const removeItem = () => {
-    dispatch({ type: 'DELETE_ITEM', id: dataItem.id })
+    dispatch(actionRemove(dataItem.id))
   }
 
   const completedItem = () => {
-    dispatch({ type: 'COMPLETED_ITEM', id: dataItem.id })
+    dispatch(actionCompleted(dataItem.id))
   }
 
 
@@ -36,7 +38,7 @@ const ToDoItem = ({ dataItem, index }) => {
 
     setShowFormChanges(!showFormChanges)
 
-    dispatch({ type: 'CHANGE_ITEM', data: { changedData: dataChang, id: dataItem.id } })
+    dispatch(actionChange(dataItem.id, dataChang))
 
   }
 
