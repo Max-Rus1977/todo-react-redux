@@ -10,15 +10,34 @@ const defaultState = {
 
 export const todoReducer = (state = defaultState, action) => {
 
-  // console.log('action >>>', action);
+  console.log('action >>>', action);
 
   switch (action.type) {
     case 'ADD_ITEM':
       return { ...state, arrItemsData: [...state.arrItemsData, { ...action.newItem }] }
+
     case 'DELETE_ITEM':
       return { ...state, arrItemsData: [...state.arrItemsData.filter((item) => item.id !== action.id)] }
+
     case 'COMPLETED_ITEM':
-      return { ...state, arrItemsData: [...state.arrItemsData[index].completed = isCompleted] }
+      return {
+        ...state, arrItemsData:
+          [...state.arrItemsData.map(
+            (item) => item.id === action.id
+              ? { ...item, completed: !item.completed }
+              : item
+          )]
+      }
+
+    case 'CHANGE_ITEM':
+      return {
+        ...state, arrItemsData:
+          [...state.arrItemsData.map(
+            (item) => item.id === action.data.id
+              ? { ...item, title: action.data.changedData.title, text: action.data.changedData.text }
+              : item
+          )]
+      }
 
     default:
       return state

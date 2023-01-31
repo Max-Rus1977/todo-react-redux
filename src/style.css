@@ -108,6 +108,12 @@ textarea:focus {
   border-radius: 8px;
 }
 
+.completed {
+  background-color: rgb(124 124 124 / 13%);
+  text-decoration: line-through;
+  color: rgb(0 0 0 / 42%);
+}
+
 .box-todo .box-input {
   margin-top: 0;
 }
@@ -139,12 +145,6 @@ textarea:focus {
 
 .btn-patch {
   color: #b58e00;
-}
-
-.completed {
-  background-color: rgb(124 124 124 / 13%);
-  text-decoration: line-through;
-  color: rgb(0 0 0 / 42%);
 }
 
 .btn-comped {

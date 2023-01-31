@@ -7,8 +7,6 @@ const ToDoList = () => {
   const arrItemsData = useSelector((store) => store.todoReducer.arrItemsData)
   const numFilter = useSelector((store) => store.filtersReducer)
 
-  console.log(numFilter);
-
   function filter(type) {
 
     if (type === 0) {
