@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { useInputData } from '../../../hook/useInputData'
 import { actionRemove, actionCompleted, actionChange } from '../../../actions'
 
 import ContentItem from './ContentItem'
@@ -9,9 +10,10 @@ import MyButton from '../../../UI/MyButton'
 
 const ToDoItem = ({ dataItem, index }) => {
 
-  const [dataChang, setDataChang] = useState({ title: dataItem.title, text: dataItem.text })
   const [showFormChanges, setShowFormChanges] = useState(false)
   const dispatch = useDispatch()
+
+  const [getTitle, getText, data] = useInputData(dataItem)
 
   const removeItem = () => {
     dispatch(actionRemove(dataItem.id))
@@ -21,24 +23,17 @@ const ToDoItem = ({ dataItem, index }) => {
     dispatch(actionCompleted(dataItem.id))
   }
 
-
-  const changeTitle = (event) => {
-    setDataChang({ ...dataChang, title: event.target.value })
-  }
-
-  const changeText = (event) => {
-    setDataChang({ ...dataChang, text: event.target.value })
-  }
-
   const changeItem = () => {
     if (dataItem.completed) {
       alert('Законченное задание менять нельзя!')
       return
     }
 
-    setShowFormChanges(!showFormChanges)
+    if (showFormChanges) {
+      dispatch(actionChange(dataItem.id, data))
+    }
 
-    dispatch(actionChange(dataItem.id, dataChang))
+    setShowFormChanges(!showFormChanges)
 
   }
 
@@ -48,8 +43,8 @@ const ToDoItem = ({ dataItem, index }) => {
         {
           showFormChanges
             ? <>
-              <MyInput autoFocus onChange={changeTitle} value={dataChang.title} />
-              <MyInput onChange={changeText} value={dataChang.text} />
+              <MyInput autoFocus onChange={getTitle} value={data.title} />
+              <MyInput onChange={getText} value={data.text} />
             </>
             : <ContentItem index={index} dataItem={dataItem} />
         }

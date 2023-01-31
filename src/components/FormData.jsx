@@ -1,5 +1,7 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+
+import { useInputData } from '../hook/useInputData'
 
 import MyInput from '../UI/MyInput'
 import MyTextarea from '../UI/MyTextarea'
@@ -7,7 +9,7 @@ import MyButton from '../UI/MyButton'
 
 const FormData = () => {
 
-  const [dataForm, setDataForm] = useState({ inputValue: '', textareaValue: '' })
+  const [getChangeTitle, getChangeText, dataForm, setDataChang] = useInputData({ title: '', text: '' })
 
   const dispatch = useDispatch()
 
@@ -17,23 +19,14 @@ const FormData = () => {
     const newItem = {
       id: Date.now(),
       completed: false,
-      title: dataForm.inputValue,
-      text: dataForm.textareaValue,
+      title: dataForm.title,
+      text: dataForm.text,
     }
 
     dispatch({ type: 'ADD_ITEM', newItem })
 
-    setDataForm({ inputValue: '', textareaValue: '' })
+    setDataChang({ title: '', text: '' })
 
-  }
-
-
-  const getOneChangeInput = (event) => {
-    setDataForm({ ...dataForm, inputValue: event.target.value })
-  }
-
-  const getOneChangeTextarea = (event) => {
-    setDataForm({ ...dataForm, textareaValue: event.target.value })
   }
 
   return (
@@ -41,14 +34,14 @@ const FormData = () => {
       <h3>Создать задачу</h3>
       <MyInput
         className='input-title'
-        onChange={getOneChangeInput}
-        value={dataForm.inputValue}
+        onChange={getChangeTitle}
+        value={dataForm.title}
       />
       <MyTextarea
         nameClassBox='box-textarea'
         className='textarea-text'
-        onChange={getOneChangeTextarea}
-        value={dataForm.textareaValue}
+        onChange={getChangeText}
+        value={dataForm.text}
       />
       <MyButton className='btn-add'>add to do</MyButton>
     </form>
