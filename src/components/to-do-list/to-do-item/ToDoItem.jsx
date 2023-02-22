@@ -48,7 +48,6 @@ const ToDoItem = ({ dataItem, index }) => {
             </>
             : <ContentItem index={index} dataItem={dataItem} />
         }
-        <p>ID задачи: {dataItem.id}</p>
       </div>
       <div className="actions">
         <MyButton
