@@ -9,6 +9,10 @@ textarea:focus {
   outline: none;
 }
 
+body {
+  background-color: rgb(245 245 245 / 30%);
+}
+
 .app {
   width: 65%;
   margin: 0 auto;
@@ -104,6 +108,7 @@ textarea:focus {
   width: 70%;
   margin: 25px auto;
   padding: 15px 20px 15px 20px;
+  background-color: #fff;
   border: 1px solid #5c20d5;
   border-radius: 8px;
 }
